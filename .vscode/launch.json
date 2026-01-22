@@ -1,0 +1,53 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch dmarcade",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/dmarcade",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Debug parse command",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/dmarcade",
+      "args": ["parse", "${input:reportPath}"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Test Current File",
+      "type": "go",
+      "request": "launch",
+      "mode": "test",
+      "program": "${fileDirname}",
+      "args": ["-test.v"]
+    },
+    {
+      "name": "Test Current Package",
+      "type": "go",
+      "request": "launch",
+      "mode": "test",
+      "program": "${fileDirname}",
+      "args": ["-test.v", "-test.run", "${input:testName}"]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "reportPath",
+      "type": "promptString",
+      "description": "Path to report file or directory",
+      "default": "./testdata"
+    },
+    {
+      "id": "testName",
+      "type": "promptString",
+      "description": "Test name pattern",
+      "default": "."
+    }
+  ]
+}

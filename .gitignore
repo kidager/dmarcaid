@@ -1,0 +1,43 @@
+# Binaries (root level only)
+/dmarcade
+/dmarcade.exe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build output
+dist/
+bin/
+
+# Test artifacts
+coverage.out
+coverage.html
+*.test
+
+# Dependency directories
+vendor/
+
+# IDE and editor files
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Debug files
+*.log
+debug
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Plan files (local development notes)
+.my.*.md
+
+# Temporary files
+tmp/
+temp/
+*.tmp

@@ -1,0 +1,59 @@
+{
+  // Go settings
+  "go.useLanguageServer": true,
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": ["--fast"],
+  "go.formatTool": "gofumpt",
+  "go.testFlags": ["-v"],
+  "go.coverOnSave": false,
+  "go.coverOnSingleTest": true,
+  "go.coverOnSingleTestFile": true,
+  "gopls": {
+    "ui.semanticTokens": true,
+    "formatting.gofumpt": true,
+    "ui.completion.usePlaceholders": true,
+    "ui.diagnostic.analyses": {
+      "unusedparams": true,
+      "shadow": true,
+      "fieldalignment": false,
+      "nilness": true,
+      "unusedwrite": true,
+      "useany": true
+    }
+  },
+
+  // Editor settings for Go
+  "editor.formatOnSave": true,
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.snippetSuggestions": "none",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false
+  },
+  "[go.mod]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+
+  // File associations
+  "files.associations": {
+    "*.go": "go",
+    "go.mod": "go.mod",
+    "go.sum": "go.sum"
+  },
+
+  // Exclude from file watcher
+  "files.watcherExclude": {
+    "**/vendor/**": true,
+    "**/dist/**": true
+  },
+
+  // Search exclusions
+  "search.exclude": {
+    "**/vendor": true,
+    "**/dist": true,
+    "**/*.exe": true
+  }
+}

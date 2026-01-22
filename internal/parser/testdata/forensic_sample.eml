@@ -1,0 +1,46 @@
+From: DMARC Feedback <dmarc@google.com>
+To: dmarc@example.com
+Subject: Report domain: example.com Submitter: google.com
+Date: Mon, 20 Jan 2026 10:30:00 -0000
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=feedback-report; boundary="----=_Part_123456"
+
+This is a multi-part message in MIME format.
+
+------=_Part_123456
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+This is an authentication failure report for an email message
+received from IP 192.0.2.1 on Mon, 20 Jan 2026 10:25:00 -0000.
+
+------=_Part_123456
+Content-Type: message/feedback-report
+
+Feedback-Type: auth-failure
+User-Agent: google.com/dmarc_reporter/1.0
+Version: 1
+Arrival-Date: Mon, 20 Jan 2026 10:25:00 -0000
+Source-IP: 192.0.2.1
+Reported-Domain: example.com
+Authentication-Results: google.com; dkim=fail; spf=fail; dmarc=fail
+Original-Mail-From: attacker@malicious.com
+Original-Rcpt-To: victim@example.com
+DKIM-Domain: example.com
+DKIM-Selector: selector1
+Delivery-Result: policy
+
+------=_Part_123456
+Content-Type: message/rfc822
+
+From: "Sender Name" <sender@example.com>
+To: victim@example.com
+Subject: Test Email Subject
+Date: Mon, 20 Jan 2026 10:20:00 -0000
+Message-ID: <test123@example.com>
+MIME-Version: 1.0
+Content-Type: text/plain
+
+This is the original message body.
+
+------=_Part_123456--
