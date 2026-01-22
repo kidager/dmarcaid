@@ -19,7 +19,15 @@ A fast, modern CLI tool for parsing and analyzing DMARC, TLS-RPT, and DMARC fore
 ### Homebrew (macOS/Linux)
 
 ```bash
-brew install kidager/tap/dmarcaid
+brew install --cask kidager/tap/dmarcaid
+```
+
+#### macOS Gatekeeper
+
+On macOS, you may see a warning that the binary "cannot be verified". This is because the binary is not signed with an Apple Developer certificate. To allow it to run:
+
+```bash
+xattr -d com.apple.quarantine $(which dmarcaid)
 ```
 
 ### Go Install
