@@ -9,13 +9,26 @@ repos:
         args: ['--maxkb=1000']
       - id: check-merge-conflict
 
-  - repo: https://github.com/dnephin/pre-commit-golang
-    rev: v0.5.1
+  # Go toolchain hooks — versions for golangci-lint live in go.mod (tool directive),
+  # so the local hooks always match what CI runs.
+  - repo: local
     hooks:
       - id: go-fmt
-      - id: go-mod-tidy
+        name: go fmt
+        entry: gofmt -l -w
+        language: system
+        types: [go]
 
-  - repo: https://github.com/golangci/golangci-lint
-    rev: v2.11.4
-    hooks:
+      - id: go-mod-tidy
+        name: go mod tidy
+        entry: bash -c 'go mod tidy && git diff --exit-code go.mod go.sum'
+        language: system
+        pass_filenames: false
+        types: [go]
+
       - id: golangci-lint
+        name: golangci-lint
+        entry: go tool golangci-lint run --timeout=5m
+        language: system
+        pass_filenames: false
+        types: [go]
