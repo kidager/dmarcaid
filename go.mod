@@ -1,6 +1,6 @@
 module github.com/kidager/dmarcaid
 
-go 1.25.5
+go 1.25.10
 
 require (
 	github.com/charmbracelet/lipgloss v1.1.0
