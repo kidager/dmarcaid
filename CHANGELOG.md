@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/kidager/dmarcaid/compare/v1.0.1...v1.0.2) (2026-05-10)
+
+
+### Bug Fixes
+
+* **lint:** QF1012 + pin golangci-lint via go.mod, bump go 1.25.10, action majors ([6b5152b](https://github.com/kidager/dmarcaid/commit/6b5152bc6a033127c6855c07996a12b4c573fa8c))
+
 ## [1.0.1](https://github.com/kidager/dmarcaid/compare/v1.0.0...v1.0.1) (2026-01-22)
 
 
