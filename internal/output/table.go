@@ -95,9 +95,9 @@ func TableOutput(result *types.ParseResult, detailed bool) string {
 		sb.WriteString(errorStyle.Render(fmt.Sprintf("Errors (%d):", len(result.Errors))))
 		sb.WriteString("\n")
 		for _, e := range result.Errors {
-			sb.WriteString(fmt.Sprintf("  %s %s\n",
+			fmt.Fprintf(&sb, "  %s %s\n",
 				mutedStyle.Render(e.File+":"),
-				failStyle.Render(e.Error)))
+				failStyle.Render(e.Error))
 		}
 	}
 
@@ -173,21 +173,21 @@ func renderDMARCDetails(r types.DMARCReport) string {
 
 	// Authentication breakdown
 	sb.WriteString(mutedStyle.Render("    Auth: "))
-	sb.WriteString(fmt.Sprintf("SPF+DKIM=%d  DKIM-only=%d  SPF-only=%d  Neither=%d\n",
-		r.Breakdown.SPFAndDKIM, r.Breakdown.DKIMOnly, r.Breakdown.SPFOnly, r.Breakdown.Neither))
+	fmt.Fprintf(&sb, "SPF+DKIM=%d  DKIM-only=%d  SPF-only=%d  Neither=%d\n",
+		r.Breakdown.SPFAndDKIM, r.Breakdown.DKIMOnly, r.Breakdown.SPFOnly, r.Breakdown.Neither)
 
 	// Policy stats
 	sb.WriteString(mutedStyle.Render("    Policy: "))
-	sb.WriteString(fmt.Sprintf("none=%d  quarantine=%d  reject=%d\n",
-		r.PolicyApplied.None, r.PolicyApplied.Quarantine, r.PolicyApplied.Reject))
+	fmt.Fprintf(&sb, "none=%d  quarantine=%d  reject=%d\n",
+		r.PolicyApplied.None, r.PolicyApplied.Quarantine, r.PolicyApplied.Reject)
 
 	// Sources
 	if len(r.Sources) > 0 {
 		sb.WriteString(mutedStyle.Render("    Sources:"))
 		sb.WriteString("\n")
 		for _, src := range r.Sources {
-			sb.WriteString(fmt.Sprintf("      %-40s %d msgs, SPF=%s, DKIM=%s\n",
-				src.IP, src.Count, src.SPFResult, src.DKIMResult))
+			fmt.Fprintf(&sb, "      %-40s %d msgs, SPF=%s, DKIM=%s\n",
+				src.IP, src.Count, src.SPFResult, src.DKIMResult)
 		}
 	}
 
@@ -196,8 +196,8 @@ func renderDMARCDetails(r types.DMARCReport) string {
 		sb.WriteString(failStyle.Render("    Failures:"))
 		sb.WriteString("\n")
 		for _, f := range r.Failures {
-			sb.WriteString(fmt.Sprintf("      %-30s %d msgs from %-40s SPF=%s, DKIM=%s\n",
-				f.HeaderFrom, f.Count, f.SourceIP, f.SPFResult, f.DKIMResult))
+			fmt.Fprintf(&sb, "      %-30s %d msgs from %-40s SPF=%s, DKIM=%s\n",
+				f.HeaderFrom, f.Count, f.SourceIP, f.SPFResult, f.DKIMResult)
 		}
 	}
 
@@ -251,8 +251,8 @@ func renderTLSDetails(r types.TLSReport) string {
 	sb.WriteString(failStyle.Render("    Failures:"))
 	sb.WriteString("\n")
 	for _, f := range r.Failures {
-		sb.WriteString(fmt.Sprintf("      %-30s %d sessions (%s -> %s)\n",
-			f.Type, f.Count, f.SendingMTA, f.ReceivingMTA))
+		fmt.Fprintf(&sb, "      %-30s %d sessions (%s -> %s)\n",
+			f.Type, f.Count, f.SendingMTA, f.ReceivingMTA)
 	}
 
 	sb.WriteString("\n")
@@ -333,13 +333,13 @@ func renderForensicDetails(r types.ForensicReport) string {
 	if r.DKIMDomain != "" || r.DKIMSelector != "" {
 		sb.WriteString(mutedStyle.Render("    DKIM: "))
 		if r.DKIMDomain != "" {
-			sb.WriteString(fmt.Sprintf("domain=%s", r.DKIMDomain))
+			fmt.Fprintf(&sb, "domain=%s", r.DKIMDomain)
 		}
 		if r.DKIMSelector != "" {
 			if r.DKIMDomain != "" {
 				sb.WriteString(", ")
 			}
-			sb.WriteString(fmt.Sprintf("selector=%s", r.DKIMSelector))
+			fmt.Fprintf(&sb, "selector=%s", r.DKIMSelector)
 		}
 		sb.WriteString("\n")
 	}
@@ -465,7 +465,7 @@ func InsightsOutput(insights *analysis.InsightsResult, detailed bool) string {
 	if insights.InfoCount > 0 {
 		summaryParts = append(summaryParts, infoStyle.Render(fmt.Sprintf("%d info", insights.InfoCount)))
 	}
-	sb.WriteString(fmt.Sprintf("Found %s", strings.Join(summaryParts, ", ")))
+	fmt.Fprintf(&sb, "Found %s", strings.Join(summaryParts, ", "))
 
 	if !detailed {
 		sb.WriteString(mutedStyle.Render("  (use --detailed for recommendations)"))
@@ -503,11 +503,11 @@ func renderInsight(i analysis.Insight) string {
 		domain = mutedStyle.Render(fmt.Sprintf(" (%s)", i.Domain))
 	}
 
-	sb.WriteString(fmt.Sprintf("%s %s%s\n", severityIndicator, insightTitleStyle.Render(i.Title), domain))
-	sb.WriteString(fmt.Sprintf("  %s\n", insightDescStyle.Render(i.Description)))
+	fmt.Fprintf(&sb, "%s %s%s\n", severityIndicator, insightTitleStyle.Render(i.Title), domain)
+	fmt.Fprintf(&sb, "  %s\n", insightDescStyle.Render(i.Description))
 
 	if i.Suggestion != "" {
-		sb.WriteString(fmt.Sprintf("  %s %s\n", mutedStyle.Render("->"), suggestionStyle.Render(i.Suggestion)))
+		fmt.Fprintf(&sb, "  %s %s\n", mutedStyle.Render("->"), suggestionStyle.Render(i.Suggestion))
 	}
 
 	sb.WriteString("\n")
