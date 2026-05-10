@@ -1,6 +1,6 @@
 # 💊 dmarcaid
 
-> Version <!-- x-release-please-version -->1.0.1<!-- x-release-please-end -->
+> Version <!-- x-release-please-version -->1.0.2<!-- x-release-please-end -->
 
 A fast, modern CLI tool for parsing and analyzing DMARC, TLS-RPT, and DMARC forensic reports.
 
