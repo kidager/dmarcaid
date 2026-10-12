@@ -33,7 +33,7 @@ xattr -d com.apple.quarantine $(which dmarcaid)
 ### Go Install
 
 ```bash
-go install github.com/kidager/dmarcaid@latest
+go install github.com/kidager/dmarcaid/cmd/dmarcaid@latest
 ```
 
 ### Download Binary

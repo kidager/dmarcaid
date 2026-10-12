@@ -1,11 +1,11 @@
-# dmarcade - DMARC & TLS-RPT Report Analyzer
+# dmarcaid - DMARC & TLS-RPT Report Analyzer
 
 set shell := ["bash", "-cu"]
 
 version := `git describe --tags --always --dirty 2>/dev/null || echo "dev"`
 commit := `git rev-parse --short HEAD 2>/dev/null || echo "none"`
 build_date := `date -u +"%Y-%m-%dT%H:%M:%SZ"`
-ldflags := "-X github.com/kidager/dmarcade/internal/cmd.Version=" + version + " -X github.com/kidager/dmarcade/internal/cmd.Commit=" + commit + " -X github.com/kidager/dmarcade/internal/cmd.BuildDate=" + build_date
+ldflags := "-X github.com/kidager/dmarcaid/internal/cmd.Version=" + version + " -X github.com/kidager/dmarcaid/internal/cmd.Commit=" + commit + " -X github.com/kidager/dmarcaid/internal/cmd.BuildDate=" + build_date
 
 # List available commands
 default:
@@ -13,28 +13,28 @@ default:
 
 # Build the binary
 build:
-    go build -ldflags '{{ldflags}}' -o dmarcade ./cmd/dmarcade
+    go build -ldflags '{{ldflags}}' -o dmarcaid ./cmd/dmarcaid
 
 # Build for all platforms
 build-all: build-linux build-darwin build-windows
 
 # Build for Linux (amd64 and arm64)
 build-linux:
-    GOOS=linux GOARCH=amd64 go build -ldflags '{{ldflags}}' -o dist/dmarcade-linux-amd64 ./cmd/dmarcade
-    GOOS=linux GOARCH=arm64 go build -ldflags '{{ldflags}}' -o dist/dmarcade-linux-arm64 ./cmd/dmarcade
+    GOOS=linux GOARCH=amd64 go build -ldflags '{{ldflags}}' -o dist/dmarcaid-linux-amd64 ./cmd/dmarcaid
+    GOOS=linux GOARCH=arm64 go build -ldflags '{{ldflags}}' -o dist/dmarcaid-linux-arm64 ./cmd/dmarcaid
 
 # Build for macOS (amd64 and arm64)
 build-darwin:
-    GOOS=darwin GOARCH=amd64 go build -ldflags '{{ldflags}}' -o dist/dmarcade-darwin-amd64 ./cmd/dmarcade
-    GOOS=darwin GOARCH=arm64 go build -ldflags '{{ldflags}}' -o dist/dmarcade-darwin-arm64 ./cmd/dmarcade
+    GOOS=darwin GOARCH=amd64 go build -ldflags '{{ldflags}}' -o dist/dmarcaid-darwin-amd64 ./cmd/dmarcaid
+    GOOS=darwin GOARCH=arm64 go build -ldflags '{{ldflags}}' -o dist/dmarcaid-darwin-arm64 ./cmd/dmarcaid
 
 # Build for Windows
 build-windows:
-    GOOS=windows GOARCH=amd64 go build -ldflags '{{ldflags}}' -o dist/dmarcade-windows-amd64.exe ./cmd/dmarcade
+    GOOS=windows GOARCH=amd64 go build -ldflags '{{ldflags}}' -o dist/dmarcaid-windows-amd64.exe ./cmd/dmarcaid
 
 # Install to GOPATH/bin
 install:
-    go install -ldflags '{{ldflags}}' ./cmd/dmarcade
+    go install -ldflags '{{ldflags}}' ./cmd/dmarcaid
 
 # Run tests
 test:
@@ -60,14 +60,14 @@ tidy:
 
 # Clean build artifacts
 clean:
-    rm -f dmarcade
+    rm -f dmarcaid
     rm -rf dist/
     rm -f coverage.out coverage.html
     go clean
 
 # Run the app (for development)
 run *ARGS:
-    go run ./cmd/dmarcade {{ARGS}}
+    go run ./cmd/dmarcaid {{ARGS}}
 
 # Check for outdated dependencies
 outdated:
