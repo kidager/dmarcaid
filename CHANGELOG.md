@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.3](https://github.com/kidager/dmarcaid/compare/v1.0.2...v1.0.3) (2026-10-12)
+
+
+### Bug Fixes
+
+* finish the dmarcade to dmarcaid rename and fix the go install path ([f562cd0](https://github.com/kidager/dmarcaid/commit/f562cd0396d5783918498ddce2bcbe467c48209d))
+
+
+### Dependencies
+
+* go 1.27.2, golangci-lint 2.14.0, testify 1.12.1 ([580cdad](https://github.com/kidager/dmarcaid/commit/580cdad4df09bbc2f4abceab148694df6d9b0680))
+
+
+### Continuous Integration
+
+* release through kidager-bot, ubuntu-26.04 runners, action updates ([e469ee5](https://github.com/kidager/dmarcaid/commit/e469ee5c6141687efd0a28c19a34e47b7c014ab2))
+
 ## [1.0.2](https://github.com/kidager/dmarcaid/compare/v1.0.1...v1.0.2) (2026-05-10)
 
 
