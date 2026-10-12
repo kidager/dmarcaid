@@ -1,6 +1,6 @@
 # Binaries (root level only)
-/dmarcade
-/dmarcade.exe
+/dmarcaid
+/dmarcaid.exe
 *.exe
 *.dll
 *.so
